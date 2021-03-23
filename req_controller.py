@@ -10,11 +10,16 @@ def best_crop():
 def add_nums(a,b):
     return jsonify({ 'add_res': a+b})
 
-@app.route('/find_best/<temp>/<hum>/<ph>/<rf>')
-def find_best(temp,hum,ph,rf):
-    temp,hum,ph,rf = tuple(map(float,[temp,hum,ph,rf]))
-    return jsonify({'Temparature':temp,
-        'Humidity':hum,
-                    'pH':ph,
-                    'Rainfall':rf})
+@app.route('/find_best/<temp>/<hum>/<rf>/<ph>')
+def find_best(temp,hum,rf,ph=None):
+    if ph is None:
+        return jsonify({'Temparature':temp,
+                        'Humidity':hum,
+                         'Rainfall':rf})
+    else:    
+        temp,hum,ph,rf = tuple(map(float,[temp,hum,ph,rf]))
+        return jsonify({'Temparature':temp,
+                        'Humidity':hum,
+                        'pH':ph,
+                        'Rainfall':rf})
 app.run(debug=True,host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
