@@ -10,8 +10,9 @@ def best_crop():
 def add_nums(a,b):
     return jsonify({ 'add_res': a+b})
 
-@app.route('/find_best/<float:temp>/<float:hum>/<float:ph>/<float:rf>')
+@app.route('/find_best/<temp>/<hum>/<ph>/<rf>')
 def find_best(temp,hum,ph,rf):
+    temp,hum,ph,rf = tuple(map(float,[temp,hum,ph,rf]))
     return jsonify({'Temparature':temp,
         'Humidity':hum,
                     'pH':ph,
