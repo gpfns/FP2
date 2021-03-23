@@ -8,7 +8,7 @@ def best_crop():
 
 @app.route('/add/<int:a>/<int:b>')
 def add_nums(a,b):
-    return a+b
+    return jsonify({ 'add_res': a+b})
 
 @app.route('/find_best/<float:temp>/<float:hum>/<float:ph>/<float:rf>')
 def find_best(temp,hum,ph,rf):
