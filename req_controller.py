@@ -7,6 +7,10 @@ app=Flask(__name__)
 def best_crop():
     return 'best crop'
 
+@app.route('/')
+def home_page():
+    return "<h1>Welcome</h1>"
+
 @app.route('/add/<int:a>/<int:b>')
 def add_nums(a,b):
     return jsonify({ 'add_res': a+b})
