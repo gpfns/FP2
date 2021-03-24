@@ -39,13 +39,13 @@ def predict_best(temp,hum,rf,ph=None):
         k1=1
         ip=[[t,h,r]]
         for i in kpc[0]:
-            d1['DT'+str(k1)]=i.predict(ip)
+            d1['DT'+str(k1)]=i.predict(ip).tolist()
             k1+=1
         k1=1    
         for i in kpc[2]:
-            d1['RFC'+str(k1)]=i.predict(ip)
+            d1['RFC'+str(k1)]=i.predict(ip).tolist()
             k1+=1
-        d1['NBC']=kpc[1].predict(ip)    
+        d1['NBC']=kpc[1].predict(ip).tolist()    
         return d1    
         return jsonify(d1)
     else:    
