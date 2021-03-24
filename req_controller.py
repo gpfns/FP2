@@ -39,11 +39,11 @@ def predict_best(temp,hum,rf,ph=None):
         k1=1
         ip=[[t,h,r]]
         for i in kpc[0]:
-            d1['DT'+k1]=i.predict(ip)
+            d1['DT'+str(k1)]=i.predict(ip)
             k1+=1
         k1=1    
         for i in kpc[2]:
-            d1['RFC'+k1]=i.predict(ip)
+            d1['RFC'+str(k1)]=i.predict(ip)
             k1+=1
         d1['NBC']=kpc[1].predict(ip)    
             
@@ -53,12 +53,13 @@ def predict_best(temp,hum,rf,ph=None):
         kpc=pc[0]
         d1={}
         k1=1
+        ip=[[t,h,p,r]]
         for i in kpc[0]:
-            d1['DT'+k1]=i.predict(ip)
+            d1['DT'+str(k1)]=i.predict(ip)
             k1+=1
         k1=1    
         for i in kpc[2]:
-            d1['RFC'+k1]=i.predict(ip)
+            d1['RFC'+str(k1)]=i.predict(ip)
             k1+=1
         d1['NBC']=kpc[1].predict(ip)    
             
