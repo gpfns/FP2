@@ -27,21 +27,25 @@ def find_best(temp,hum,rf,ph=None):
                         'Humidity':hum,
                         'pH':ph,
                         'Rainfall':rf})
+
+
 @app.route('/predict/<temp>/<hum>/<rf>/<ph>')
+@app.route('/predict/<temp>/<hum>/<rf>')
 def predict_best(temp,hum,rf,ph=None):
     if ph is None:
         t,h,r=tuple(map(float,[temp,hum,rf]))
         kpc=pc[1]
         d1={}
         k1=1
+        ip=[[t,h,r]]
         for i in kpc[0]:
-            d1['DT'+k1]=i.predict([t,h,r])
+            d1['DT'+k1]=i.predict(ip)
             k1+=1
         k1=1    
         for i in kpc[2]:
-            d1['RFC'+k1]=i.predict([t,h,r])
+            d1['RFC'+k1]=i.predict(ip)
             k1+=1
-        d1['NBC']=kpc[1].predict([t,h,r])    
+        d1['NBC']=kpc[1].predict(ip)    
             
         return jsonify(d1)
     else:    
@@ -50,13 +54,13 @@ def predict_best(temp,hum,rf,ph=None):
         d1={}
         k1=1
         for i in kpc[0]:
-            d1['DT'+k1]=i.predict([t,h,p,r])
+            d1['DT'+k1]=i.predict(ip)
             k1+=1
         k1=1    
         for i in kpc[2]:
-            d1['RFC'+k1]=i.predict([t,h,p,r])
+            d1['RFC'+k1]=i.predict(ip)
             k1+=1
-        d1['NBC']=kpc[1].predict([t,h,p,r])    
+        d1['NBC']=kpc[1].predict(ip)    
             
         return jsonify(d1)
         
