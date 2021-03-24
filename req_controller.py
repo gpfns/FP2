@@ -9,7 +9,7 @@ def best_crop():
 
 @app.route('/')
 def home_page():
-    return "<h1>Welcome</h1>"
+    return "<h1>Welcome ,<br> Use predict/t/h/r/ph </h1>"
 
 @app.route('/add/<int:a>/<int:b>')
 def add_nums(a,b):
