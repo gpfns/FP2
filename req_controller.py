@@ -46,7 +46,7 @@ def predict_best(temp,hum,rf,ph=None):
             d1['RFC'+str(k1)]=i.predict(ip)
             k1+=1
         d1['NBC']=kpc[1].predict(ip)    
-            
+        return d1    
         return jsonify(d1)
     else:    
         t,h,p,r = tuple(map(float,[temp,hum,ph,rf]))
@@ -62,7 +62,8 @@ def predict_best(temp,hum,rf,ph=None):
             d1['RFC'+str(k1)]=i.predict(ip)
             k1+=1
         d1['NBC']=kpc[1].predict(ip)    
-            
+        
+        return d1    
         return jsonify(d1)
         
 pc = grab()    
