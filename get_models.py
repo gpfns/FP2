@@ -13,8 +13,8 @@ def grab():
   dtwoph=[]
   rfcph=[]
   rfcwoph=[]
-  nbcph=pickle.load(open(fn[4],'rb'))
-  nbcwoph=pickle.load(open(fn[5],'rb'))
+  nbcph=pickle.load(open(fn[5],'rb'))
+  nbcwoph=pickle.load(open(fn[4],'rb'))
   for i in fn[0:2]:
       t23 = pickle.load(open(i,'rb'))
       dtwoph.append(t23)
