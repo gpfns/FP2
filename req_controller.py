@@ -67,7 +67,7 @@ def predict_best(temp,hum,rf,ph=None):
 
     
 @app.route('/predict1/<temp>/<hum>/<rf>',methods=['GET'])
-def predict_best(temp,hum,rf,ph=None):
+def predict_best1(temp,hum,rf,ph=None):
     if ph is None:
         t,h,r=request.args.get('temp'),request.args.get('hum'),request.args.get('rain') 
         kpc=pc[1]
