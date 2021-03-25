@@ -1,6 +1,8 @@
 import os
 from flask import Flask, jsonify,render_template,request
+from collections import Counter
 from get_models import grab
+from statistics import mode
 app=Flask(__name__)
 
 @app.route('/bestcrop')
@@ -46,6 +48,12 @@ def predict_best(temp,hum,rf,ph=None):
             d1['RFC'+str(k1)]=i.predict(ip).tolist()
             k1+=1
         d1['NBC']=kpc[1].predict(ip).tolist()
+        l2=[]
+        for i in d1:
+            l2.extend(d1[i])
+        d1['Crop']=mode(l2)
+        d2=Counter(l2)
+        d1.update(d2)
         return jsonify(d1)
     else:    
         t,h,p,r = tuple(map(float,[temp,hum,ph,rf]))
@@ -61,7 +69,12 @@ def predict_best(temp,hum,rf,ph=None):
             d1['RFC'+str(k1)]=i.predict(ip).tolist()
             k1+=1
         d1['NBC']=kpc[1].predict(ip).tolist()    
-        
+        l2=[]
+        for i in d1:
+            l2.extend(d1[i])
+        d1['Crop']=mode(l2)
+        d2=Counter(l2)
+        d1.update(d2)
         return jsonify(d1)
 
     
@@ -73,17 +86,19 @@ def predict_best1():
     d1={}
     k1=1
     ip=[[t,h,r]]
-    """
     for i in kpc[0]:
         d1['DT'+str(k1)]=i.predict(ip).tolist()
         k1+=1
     k1=1    
     for i in kpc[2]:
         d1['RFC'+str(k1)]=i.predict(ip).tolist()
-        k1+=1
-    """    
+        k1+=1    
     d1['NBC']=kpc[1].predict(ip).tolist()
     s1 = str(d1['NBC'])
+    l2=[]
+    for i in d1:
+        l2.extend(d1[i])
+    s1=mode(l2)
     return render_template('home_page.html',best_predicted_crop=s1)
     
 pc = grab()    
