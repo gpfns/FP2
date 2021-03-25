@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify,render_template
 from get_models import grab
 app=Flask(__name__)
 
@@ -74,6 +74,7 @@ def predict_best1(temp,hum,rf,ph=None):
         d1={}
         k1=1
         ip=[[t,h,r]]
+        """
         for i in kpc[0]:
             d1['DT'+str(k1)]=i.predict(ip).tolist()
             k1+=1
@@ -81,6 +82,7 @@ def predict_best1(temp,hum,rf,ph=None):
         for i in kpc[2]:
             d1['RFC'+str(k1)]=i.predict(ip).tolist()
             k1+=1
+        """    
         d1['NBC']=kpc[1].predict(ip).tolist()
         s1 = "The Best Crop to grow according to your climatic conditions is "+d1['NBC']
         return render_template('home_page.html',best_predicted_crop=s1)
