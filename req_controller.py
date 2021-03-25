@@ -9,7 +9,7 @@ def best_crop():
 
 @app.route('/')
 def home_page():
-    return "<h1>Welcome ,<br> Use predict/t/h/r/ph </h1>"
+    return render_template("home_page.html")
 
 @app.route('/add/<int:a>/<int:b>')
 def add_nums(a,b):
@@ -45,7 +45,7 @@ def predict_best(temp,hum,rf,ph=None):
         for i in kpc[2]:
             d1['RFC'+str(k1)]=i.predict(ip).tolist()
             k1+=1
-        d1['NBC']=kpc[1].predict(ip).tolist()        
+        d1['NBC']=kpc[1].predict(ip).tolist()
         return jsonify(d1)
     else:    
         t,h,p,r = tuple(map(float,[temp,hum,ph,rf]))
@@ -64,6 +64,26 @@ def predict_best(temp,hum,rf,ph=None):
         
         return d1    
         return jsonify(d1)
-        
+
+    
+@app.route('/predict1/<temp>/<hum>/<rf>',methods=['GET'])
+def predict_best(temp,hum,rf,ph=None):
+    if ph is None:
+        t,h,r=request.args.get('temp'),request.args.get('hum'),request.args.get('rain') 
+        kpc=pc[1]
+        d1={}
+        k1=1
+        ip=[[t,h,r]]
+        for i in kpc[0]:
+            d1['DT'+str(k1)]=i.predict(ip).tolist()
+            k1+=1
+        k1=1    
+        for i in kpc[2]:
+            d1['RFC'+str(k1)]=i.predict(ip).tolist()
+            k1+=1
+        d1['NBC']=kpc[1].predict(ip).tolist()
+        s1 = "The Best Crop to grow according to your climatic conditions is "+d1['NBC']
+        return render_template('home_page.html',best_predicted_crop=s1)
+    
 pc = grab()    
 app.run(debug=True,host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
