@@ -62,7 +62,6 @@ def predict_best(temp,hum,rf,ph=None):
             k1+=1
         d1['NBC']=kpc[1].predict(ip).tolist()    
         
-        return d1    
         return jsonify(d1)
 
     
@@ -84,7 +83,7 @@ def predict_best1():
             k1+=1
         """    
         d1['NBC']=kpc[1].predict(ip).tolist()
-        s1 = "The Best Crop to grow according to your climatic conditions is "+d1['NBC']
+        s1 = str(d1['NBC'])
         return render_template('home_page.html',best_predicted_crop=s1)
     
 pc = grab()    
