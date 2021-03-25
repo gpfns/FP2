@@ -68,6 +68,7 @@ def predict_best(temp,hum,rf,ph=None):
 @app.route('/predict1',methods=['GET'])
 def predict_best1():
     t,h,r=request.args.get('temp'),request.args.get('hum'),request.args.get('rain') 
+    t,h,r=tuple(map(float,[t,h,r]))
     kpc=pc[1]
     d1={}
     k1=1
