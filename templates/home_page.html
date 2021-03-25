@@ -45,18 +45,17 @@
 	 </div>
 
 
-
-<div class="container">
-<div class="row">
-    <div class="col-md-8 mx-auto">
-	  		<div class="alert alert-success" role="alert">
-  					
-            {{ best_predicted_crop }}
-			</div>
-
-    </div>
-  </div>
-	 </div>
+{% if best_predicted_crop %}
+	<div class="container">
+		<div class="row">
+    			<div class="col-md-8 mx-auto">
+	  			<div class="alert alert-success" role="alert">
+ 					The Best Crop to grow according to your climatic conditions is {{ best_predicted_crop }}.
+				</div>
+    			</div>
+  		</div>
+	</div>
+{% endif %}	
 
 </form>
 
