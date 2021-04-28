@@ -35,7 +35,7 @@ def update_nim_file(l1):
     
 
 @app.route('/nr')
-def game_of_nim():
+def game_of_nim_reset():
     file = open('nim/n.txt','w')
     file.write("1\n3\n5\n7")
     file.close()
