@@ -23,7 +23,7 @@ def game_of_nim(a,b):
     update_nim_file(l1)
     s1=''
     for j in l1:
-        s1+=i*'|\t'
+        s1+=j*'\t|'
         s1+='\n'
     return s1    
 
