@@ -15,11 +15,15 @@ def home_page():
 
 @app.route('/n/<int:a>/<int:b>')
 @app.route('/n')
-def game_of_nim(a=1,b=0):
+def game_of_nim(a=None,b=None):
+    if a is None and b is None:
+        return render_template('nim_game_tem.html')    
     l1=[]
     with open("nim/n.txt") as file:
     	for each in file:
             l1.append(int(each))
+    a,b=request.args.get('a'),request.args.get('b') 
+    a,b=tuple(map(int,[a,b]))        
     l1[a]-=b
     update_nim_file(l1)
     s1=''
