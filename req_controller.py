@@ -23,7 +23,7 @@ def game_of_nim(a,b):
     update_nim_file(l1)
     s1=''
     for j in l1:
-        s1+=j*'\t|\t'+'\t'+str(j)
+        s1+=j*'\t|\t'+(10-j)*'&nbsp;'+str(j)
         s1+='<br>'
     return s1    
 
@@ -35,7 +35,7 @@ def game_of_nim_view():
             l1.append(int(each))
     s1=''
     for j in l1:
-        s1+=j*'&nbsp;|'+(7-j)*'&nbsp;'+str(j)
+        s1+=j*'&nbsp;|&nbsp;'+(10-j)*'&nbsp;'+str(j)
         s1+='<br>'
     return s1    
 
