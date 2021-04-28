@@ -13,6 +13,35 @@ def best_crop():
 def home_page():
     return render_template("home_page.html")
 
+@app.route('/n/<int:a>/<int:b>')
+def game_of_nim(a,b):
+    l1=[]
+    with open("nim/n.txt") as file:
+    	for each in file:
+            l1.append(int(each))
+    l1[a]-=b
+    update_nim_file(l1)
+    s1=''
+    for j in l1:
+        s1+=i*'|\t'
+        s1+='\n'
+    return s1    
+
+def update_nim_file(l1):
+    file = open('nim/n.txt','w')
+    l1=list(map(str,l1))
+    file.write('\n'.join(l1))
+    file.close()
+    
+
+@app.route('/nr')
+def game_of_nim():
+    file = open('nim/n.txt','w')
+    file.write("1\n3\n5\n7")
+    file.close()
+    return "you can start your new game , n/row/number_of_matches_to_be_removed"
+
+
 @app.route('/add/<int:a>/<int:b>')
 def add_nums(a,b):
     return jsonify({ 'add_res': a+b})
