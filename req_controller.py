@@ -23,8 +23,8 @@ def game_of_nim(a,b):
     update_nim_file(l1)
     s1=''
     for j in l1:
-        s1+=j*'\t|\t'+(10-j)*'&nbsp;'+str(j)
-        s1+='<br>'
+        s1+=j*'\t|\t'+(10-j)*' '+str(j)
+        s1+='\n'
     return render_template('nim_game_tem.html',best_predicted_crop=s1)
     
 
