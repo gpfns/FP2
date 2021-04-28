@@ -14,7 +14,7 @@ def home_page():
     return render_template("home_page.html")
 
 @app.route('/nab')
-def game_of_nim(a,b):
+def game_of_nim():
     l1=[]
     with open("nim/n.txt") as file:
     	for each in file:
