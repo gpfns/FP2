@@ -35,7 +35,7 @@ def game_of_nim_view():
             l1.append(int(each))
     s1=''
     for j in l1:
-        s1+=j*'\t|\t'+(7-j)*'\t'+str(j)
+        s1+=j*'\t|\t'+(7-j)*'&nbsp'+str(j)
         s1+='<br>'
     return s1    
 
