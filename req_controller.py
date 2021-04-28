@@ -15,7 +15,7 @@ def home_page():
 
 @app.route('/n/<int:a>/<int:b>')
 @app.route('/n')
-def game_of_nim(a=None,b=None):
+def game_of_nim(a=1,b=0):
     l1=[]
     with open("nim/n.txt") as file:
     	for each in file:
