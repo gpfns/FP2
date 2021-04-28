@@ -27,6 +27,21 @@ def game_of_nim(a,b):
         s1+='<br>'
     return s1    
 
+@app.route('/nv')
+def game_of_nim_view():
+    l1=[]
+    with open("nim/n.txt") as file:
+    	for each in file:
+            l1.append(int(each))
+    s1=''
+    for j in l1:
+        s1+=j*'\t|\t'+(7-j)*'\t'+str(j)
+        s1+='<br>'
+    return s1    
+
+
+
+
 def update_nim_file(l1):
     file = open('nim/n.txt','w')
     l1=list(map(str,l1))
