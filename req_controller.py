@@ -13,11 +13,8 @@ def best_crop():
 def home_page():
     return render_template("home_page.html")
 
-@app.route('/n/<int:a>/<int:b>')
-@app.route('/n')
-def game_of_nim(a=None,b=None):
-    if a is None and b is None:
-        return render_template('nim_game_tem.html')    
+@app.route('/nab')
+def game_of_nim(a,b):
     l1=[]
     with open("nim/n.txt") as file:
     	for each in file:
@@ -31,7 +28,10 @@ def game_of_nim(a=None,b=None):
         s1+=j*' |'+str(j)
         s1+='\n'
     return render_template('nim_game_tem.html',best_predicted_crop=s1)
-    
+
+@app.route('/n')
+def game_of_nim_e(a=None,b=None):
+        return render_template('nim_game_tem.html')
 
 @app.route('/nv')
 def game_of_nim_view():
@@ -61,7 +61,7 @@ def game_of_nim_reset():
     file.write("1\n3\n5\n7")
     file.close()
     
-    return redirect(url_for('game_of_nim'))
+    return redirect(url_for('game_of_nim_e'))
 
 
 @app.route('/add/<int:a>/<int:b>')
