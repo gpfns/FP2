@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify,render_template,request
+from flask import Flask, jsonify,render_template,request,redirect,url_for
 from collections import Counter
 from get_models import grab
 from statistics import mode
@@ -14,7 +14,8 @@ def home_page():
     return render_template("home_page.html")
 
 @app.route('/n/<int:a>/<int:b>')
-def game_of_nim(a,b):
+@app.route('/n')
+def game_of_nim(a=None,b=None):
     l1=[]
     with open("nim/n.txt") as file:
     	for each in file:
@@ -23,7 +24,7 @@ def game_of_nim(a,b):
     update_nim_file(l1)
     s1=''
     for j in l1:
-        s1+=j*'\t|\t'+(10-j)*' '+str(j)
+        s1+=j*' |'+str(j)
         s1+='\n'
     return render_template('nim_game_tem.html',best_predicted_crop=s1)
     
@@ -55,7 +56,8 @@ def game_of_nim_reset():
     file = open('nim/n.txt','w')
     file.write("1\n3\n5\n7")
     file.close()
-    return "you can start your new game , n/row/number_of_matches_to_be_removed"
+    
+    return redirect(url_for('game_of_nim'))
 
 
 @app.route('/add/<int:a>/<int:b>')
