@@ -25,7 +25,8 @@ def game_of_nim(a,b):
     for j in l1:
         s1+=j*'\t|\t'+(10-j)*'&nbsp;'+str(j)
         s1+='<br>'
-    return s1    
+    return render_template('nim_game_tem.html',best_predicted_crop=s1)
+    
 
 @app.route('/nv')
 def game_of_nim_view():
