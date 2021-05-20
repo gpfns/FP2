@@ -1,1 +1,1 @@
-web: python req_controller.py
+web: python run.py
