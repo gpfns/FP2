@@ -1,13 +1,12 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import jsonify, render_template, request, redirect, url_for
 from collections import Counter
 from agro_pro.get_models import grab
 from statistics import mode
 from agro_pro import app
-
-
-@app.route('/bestcrop')
-def best_crop():
-    return 'best crop'
+import requests
+import json
+from agro_pro.test1 import get_climate_by_lat_long
+from agro_pro.test1 import get_forecast_by_lat_long
 
 
 @app.route('/')
@@ -15,55 +14,20 @@ def home_page():
     return render_template("home_page.html")
 
 
-@app.route('/nab')
-def game_of_nim():
-    l1 = []
-    with open("../nim/n.txt") as file:
-        for each in file:
-            l1.append(int(each))
-    a, b = request.args.get('a'), request.args.get('b')
-    a, b = tuple(map(int, [a, b]))
-    l1[a] -= b
-    update_nim_file(l1)
-    s1 = ''
-    for j in l1:
-        s1 += j * ' |' + str(j)
-        s1 += '\n'
-    return render_template('nim_game_tem.html', best_predicted_crop=s1)
+@app.route('/get_crop_lat_long/<float:latitude>/<float:longitude>', methods=['GET', 'POST'])
+def get_climate_by_lat_long(latitude, longitude):
+    sample = get_climate_by_lat_long(latitude, longitude)
+    return render_template('simple_data_display.html', display_text=sample)
 
 
-@app.route('/n')
-def game_of_nim_e(a=None, b=None):
-    return render_template('nim_game_tem.html')
-
-
-@app.route('/nv')
-def game_of_nim_view():
-    l1 = []
-    with open("../nim/n.txt") as file:
-        for each in file:
-            l1.append(int(each))
-    s1 = ''
-    for j in l1:
-        s1 += j * '&nbsp;|&nbsp;' + (10 - j) * '&nbsp;' + str(j)
-        s1 += '<br>'
-    return s1
-
-
-def update_nim_file(l1):
-    file = open('../nim/n.txt', 'w')
-    l1 = list(map(str, l1))
-    file.write('\n'.join(l1))
-    file.close()
-
-
-@app.route('/nr')
-def game_of_nim_reset():
-    file = open('../nim/n.txt', 'w')
-    file.write("1\n3\n5\n7")
-    file.close()
-
-    return redirect(url_for('game_of_nim_e'))
+@app.route('/forecast/<float:latitude>/<float:longitude>', methods=['GET', 'POST'])
+def get_forecast_data(latitude, longitude):
+    sample = 'Tirupati - 13.6288° N, 79.4192° E'
+    sample += 'Guntur - 16.3067° N, 80.4365° E'
+    sample += 'Banglore - 12.9716° N, 77.5946° E'
+    sample += '\n'
+    sample += get_forecast_by_lat_long(latitude, longitude)
+    return render_template('simple_data_display.html', display_text=sample)
 
 
 @app.route('/add/<int:a>/<int:b>')
@@ -157,4 +121,10 @@ def predict_best1():
 
 
 pc = grab()
+
+
 # app.run(debug=True,host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+
+@app.route('/bestcrop')
+def best_crop():
+    return 'best crop'
