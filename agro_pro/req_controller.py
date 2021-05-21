@@ -15,18 +15,19 @@ def home_page():
 
 
 @app.route('/get_crop_lat_long/<float:latitude>/<float:longitude>', methods=['GET', 'POST'])
-def get_climate_by_lat_long(latitude, longitude):
+def get_climate_by_lat_long_org(latitude, longitude):
     sample = get_climate_by_lat_long(latitude, longitude)
     return render_template('simple_data_display.html', display_text=sample)
 
 
 @app.route('/forecast/<float:latitude>/<float:longitude>', methods=['GET', 'POST'])
-def get_forecast_data(latitude, longitude):
+@app.route('/forecast/<float:latitude>/<float:longitude>/<int:days>', methods=['GET', 'POST'])
+def get_forecast_data(latitude, longitude, days=7):
     sample = 'Tirupati - 13.6288° N, 79.4192° E'
     sample += 'Guntur - 16.3067° N, 80.4365° E'
     sample += 'Banglore - 12.9716° N, 77.5946° E'
     sample += '\n'
-    sample += get_forecast_by_lat_long(latitude, longitude)
+    sample += get_forecast_by_lat_long(latitude, longitude, days)
     return render_template('simple_data_display.html', display_text=sample)
 
 
@@ -121,7 +122,7 @@ def predict_best1():
 
 
 pc = grab()
-
+# pc = ['m1']
 
 # app.run(debug=True,host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
 
