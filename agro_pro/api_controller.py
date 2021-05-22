@@ -5,8 +5,8 @@ from agro_pro.api_tools import *
 
 @app.route('/api_test')
 def fun_api_test():
-    a1 = request.GET['lat']
-    a2 = request.GET['lon']
+    a1 = request.args['lat']
+    a2 = request.args['lon']
     return api_test_tool(a1, a2)
 
 
