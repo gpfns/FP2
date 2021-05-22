@@ -13,6 +13,9 @@ def cont_fun_api_test():
 @app.route('/api_experimental')
 def cont_fun_api_experimental():
     code = request.args['code']
+    code = int(code)
+    if code == 1:
+        return render_template('sub_1/table_msp.html')
     return "Hi"
 
 
