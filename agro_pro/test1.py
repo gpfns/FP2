@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def get_forecast_by_lat_long(latitude, longitude, no_of_days):
+def get_forecast_by_lat_long(latitude, longitude, no_of_days=7):
     output = ''
     parameters = {
         'key': '6a95b306f1334a3a87c190139212005',

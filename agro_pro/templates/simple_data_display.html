@@ -5,6 +5,30 @@
 {% endblock %}
 
 {% block content %}
+
+<body class="text-center">
+    <div class="container">
+        <form method="POST" class="form-register" style="color:black">
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 font-weight-normal">
+            Please Provide the Input Details
+            </h1>
+            <br>
+            {{ form.lat.label() }}
+            {{ form.lat(class="form-control", placeholder="Enter Latitude") }}
+
+            {{ form.lon.label() }}
+            {{ form.lon(class="form-control", placeholder="Enter Longitude") }}
+
+            <br>
+
+            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+
+        </form>
+    </div>
+</body>
+
+
 <pre>
 
 {{ display_text }}

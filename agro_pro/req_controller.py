@@ -7,28 +7,51 @@ import requests
 import json
 from agro_pro.test1 import get_climate_by_lat_long
 from agro_pro.test1 import get_forecast_by_lat_long
-
+from agro_pro.forms import GetForecastForm,GetClimateForm
 
 @app.route('/')
 def home_page():
     return render_template("home_page.html")
 
 
-@app.route('/get_crop_lat_long/<float:latitude>/<float:longitude>', methods=['GET', 'POST'])
-def get_climate_by_lat_long_org(latitude, longitude):
-    sample = get_climate_by_lat_long(latitude, longitude)
-    return render_template('simple_data_display.html', display_text=sample)
+@app.route('/get_crop_lat_long', methods=['GET', 'POST'])
+def get_climate_by_lat_long_org():
+    form = GetClimateForm()
+    sample = 'Tirupati - 13.6288° N, 79.4192° E\n'
+    sample += 'Guntur - 16.3067° N, 80.4365° E\n'
+    sample += 'Bangalore - 12.9716° N, 77.5946° E\n\n'
+
+    if form.validate_on_submit():
+        latitude = form.lat.data
+        longitude = form.lon.data
+        sample += get_climate_by_lat_long(latitude, longitude)
+    elif request.method == "GET":
+        if request.args.get('lat',''):
+            latitude = request.args.get('lat')
+            longitude = request.args.get('lon')
+            sample += get_climate_by_lat_long(latitude, longitude)
+
+    return render_template('simple_data_display.html', display_text=sample, form=form)
 
 
-@app.route('/forecast/<float:latitude>/<float:longitude>', methods=['GET', 'POST'])
-@app.route('/forecast/<float:latitude>/<float:longitude>/<int:days>', methods=['GET', 'POST'])
-def get_forecast_data(latitude, longitude, days=7):
-    sample = 'Tirupati - 13.6288° N, 79.4192° E'
-    sample += 'Guntur - 16.3067° N, 80.4365° E'
-    sample += 'Banglore - 12.9716° N, 77.5946° E'
-    sample += '\n'
-    sample += get_forecast_by_lat_long(latitude, longitude, days)
-    return render_template('simple_data_display.html', display_text=sample)
+@app.route('/forecast', methods=['GET', 'POST'])
+def get_forecast_data():
+    form = GetForecastForm()
+    sample = 'Tirupati - 13.6288° N, 79.4192° E\n'
+    sample += 'Guntur - 16.3067° N, 80.4365° E\n'
+    sample += 'Bangalore - 12.9716° N, 77.5946° E\n\n'
+
+    if form.validate_on_submit():
+        latitude = form.lat.data
+        longitude = form.lon.data
+        sample += get_forecast_by_lat_long(latitude, longitude)
+    elif request.method == "GET":
+        if request.args.get('lat',''):
+            latitude = request.args.get('lat')
+            longitude = request.args.get('lon')
+            sample += get_forecast_by_lat_long(latitude, longitude)
+
+    return render_template('simple_data_display.html', display_text=sample, form=form)
 
 
 @app.route('/add/<int:a>/<int:b>')
