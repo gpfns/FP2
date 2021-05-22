@@ -9,11 +9,11 @@ def cont_fun_api_test():
     a2 = request.args['lon']
     return api_test_tool(a1, a2)
 
+
 @app.route('/api_experimental')
-def cont_fun_api_test():
+def cont_fun_api_experimental():
     code = request.args['code']
     return "Hi"
-
 
 
 @app.route('/api_weather_forecast')
@@ -28,5 +28,3 @@ def cont_fun_api_climate_details():
     a1 = request.args['lat']
     a2 = request.args['lon']
     return api_get_climate_by_lat_long(a1, a2)
-
-
