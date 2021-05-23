@@ -71,12 +71,12 @@ def api_fun_parse_future_forecast(data):
 
 def b_parse_location(data):
     s1 = "<h2> Location Details </h2><p>"
-    s1 += "Selected Place : " + data['name'] + '<br>'
-    s1 += "Region : " + data['region'] + '<br>'
-    s1 += "Country : " + data['country'] + '<br>'
-    s1 += "Latitude : " + str(data['lat']) + '<br>'
-    s1 += "Longitude : " + str(data['lon']) + '<br>'
-    s1 += "Local Time : " + data['localtime'] + '<br>'
+    s1 += "<b>Selected Place : </b>" + data['name'] + '<br>'
+    s1 += "<b>Region : </b>" + data['region'] + '<br>'
+    s1 += "<b>Country : </b>" + data['country'] + '<br>'
+    s1 += "<b>Latitude : </b>" + str(data['lat']) + '<br>'
+    s1 += "<b>Longitude : </b>" + str(data['lon']) + '<br>'
+    s1 += "<b>Local Time : </b>" + data['localtime'] + '<br>'
     s1 += '</p>'
 
     return s1
@@ -84,13 +84,13 @@ def b_parse_location(data):
 
 def b_parse_current(data):
     s1 = "<h2> Current Climate Details </h2><p>"
-    s1 += "Temperature : " + str(data['temp_c']) + '<br>'
-    s1 += "Humidity : " + str(data['humidity']) + '<br>'
-    s1 += "Condition : " + data['condition']['text'] + '<br>'
-    s1 += "Wind (KPH) : " + str(data['wind_kph']) + '<br>'
-    s1 += "Wind Direction : " + data['wind_dir'] + '<br>'
-    s1 += "Cloud : " + str(data['cloud']) + '<br>'
-    s1 += "Last Updated on : " + data['last_updated'] + '<br>'
+    s1 += "<b>Temperature : </b>" + str(data['temp_c']) + '<br>'
+    s1 += "<b>Humidity : </b>" + str(data['humidity']) + '<br>'
+    s1 += "<b>Condition : </b>" + data['condition']['text'] + '<br>'
+    s1 += "<b>Wind (KPH) : </b>" + str(data['wind_kph']) + '<br>'
+    s1 += "<b>Wind Direction : </b>" + data['wind_dir'] + '<br>'
+    s1 += "<b>Cloud : </b>" + str(data['cloud']) + '<br>'
+    s1 += "<b>Last Updated on : </b>" + data['last_updated'] + '<br>'
     s1 += '</p>'
 
     return s1
@@ -99,25 +99,25 @@ def b_parse_current(data):
 def b_parse_forecast_days(data):
     """Input forecastday in forecast"""
     # l = []
-    s1 = "<h2> Weather Forecast Data </h2><p>"
+    s1 = "<h2> Weather Forecast Data </h2><br><p>"
     # s2 = ''
     for i in data:
         s1 += 'Date : ' + i['date'] + '<br>'
-        s1 += 'Details : ' + '<br>'
-        s1 += 'Maximum Temperature -' + str(i['day']['maxtemp_c']) + '<br>'
-        s1 += 'Minimum Temperature -' + str(i['day']['mintemp_c']) + '<br>'
-        s1 += 'Average Temperature -' + str(i['day']['avgtemp_c']) + '<br>'
+        s1 += '<big>Details : </big>' + '<br>'
+        s1 += 'Maximum Temperature : ' + str(i['day']['maxtemp_c']) + '<br>'
+        s1 += 'Minimum Temperature : ' + str(i['day']['mintemp_c']) + '<br>'
+        s1 += 'Average Temperature : ' + str(i['day']['avgtemp_c']) + '<br>'
         s1 += 'Condition -' + i['day']['condition']['text'] + '<br>'
         s1 += '<br>'
-        s1 += 'Hourly Climate Details<br><br>'
+        s1 += '<big>Hourly Climate Details</big><br><br>'
         for j in i['hour']:
-            s1 += 'Time - ' + j['time'] + '<br>'
-            s1 += 'Temperature - ' + str(j['temp_c']) + '<br>'
-            s1 += 'Condition - ' + j['condition']['text'] + '<br>'
-            s1 += 'Wind (KPH) - ' + str(j['wind_kph']) + '<br>'
-            s1 += 'Humidity - ' + str(j['humidity']) + '<br>'
-            s1 += 'Cloud - ' + str(j['cloud']) + '<br>'
-            s1 += 'Chance of Rain (%) - ' + j['chance_of_rain'] + '<br>'
+            s1 += 'Time : ' + j['time'] + '<br>'
+            s1 += 'Temperature : ' + str(j['temp_c']) + '<br>'
+            s1 += 'Condition : ' + j['condition']['text'] + '<br>'
+            s1 += 'Wind (KPH) : ' + str(j['wind_kph']) + '<br>'
+            s1 += 'Humidity : ' + str(j['humidity']) + '<br>'
+            s1 += 'Cloud : ' + str(j['cloud']) + '<br>'
+            s1 += 'Chance of Rain (%) : ' + j['chance_of_rain'] + '<br>'
             s1 += '<br>'
         s1 += '<br>'
 
