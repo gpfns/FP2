@@ -5,6 +5,7 @@ from statistics import mode
 from agro_pro import app
 import requests
 import json
+from agro_pro.api_tools2 import huf_basic_predict_w_ph as b1, huf_basic_predict_wo_ph as b2
 from agro_pro.test1 import get_climate_by_lat_long
 from agro_pro.test1 import get_forecast_by_lat_long
 from agro_pro.forms import GetForecastForm, GetClimateForm
@@ -79,6 +80,8 @@ def find_best(temp, hum, rf, ph=None):
 def predict_best(temp, hum, rf, ph=None):
     if ph is None:
         t, h, r = tuple(map(float, [temp, hum, rf]))
+        ip1 = [[t, h, r]]
+        return b2(ip1)
         kpc = pc[1]
         d1 = {}
         k1 = 1
@@ -100,6 +103,8 @@ def predict_best(temp, hum, rf, ph=None):
         return jsonify(d1)
     else:
         t, h, p, r = tuple(map(float, [temp, hum, ph, rf]))
+        ip1 = [[t, h, p, r]]
+        return b1(ip1)
         kpc = pc[0]
         d1 = {}
         k1 = 1
@@ -146,6 +151,8 @@ def predict_best1():
 
 
 pc = grab()
+
+
 # pc = ['m1']
 
 
