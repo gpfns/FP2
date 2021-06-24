@@ -3,7 +3,8 @@ from flask import jsonify, render_template, request, redirect, url_for
 from agro_pro.api_tools import api_get_climate_by_lat_long, api_get_forecast_by_lat_long
 from agro_pro.api_tools2 import (api_h_crop_prediction_a as adv1,
                                  api_h_crop_prediction_b_w as basic_w,
-                                api_h_crop_prediction_b_wo as basic_wo)
+                                 api_h_crop_prediction_b_wo as basic_wo)
+import random
 
 
 @app.route('/api_how_to_use')
@@ -17,8 +18,20 @@ def cont_api_crop_prediction_b_w():
     lon = request.args.get('lon')
     ph = request.args.get('ph_soil')
     rainfall = request.args.get('rainfall')
+    rainfall = abc(int(rainfall))
     land = request.args.get('area_sq')
     return basic_w(lat, lon, ph, rainfall, land)
+
+
+def abc(rf):
+    if rf == 0:
+        return random.randint(20, 64)
+    elif rf == 1:
+        return random.randint(64, 98)
+    elif rf == 2:
+        return random.randint(98, 142)
+    else:
+        return random.randint(142, 398)
 
 
 @app.route('/api_crop_prediction_basic_wo_ph')

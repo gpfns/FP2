@@ -12,7 +12,7 @@ def fun_market_price_data():
 
 def api_h_crop_prediction_b_w(l1, l2, ph, rf, land):
     temp, hum = get_th_w_ll(l1, l2)
-    inp = [[temp, hum, ph, rf]]
+    inp = [list(map(float, [temp, hum, ph, rf]))]
     op = huf_basic_predict_w_ph(inp)
     return """<html>
       <body>
@@ -25,7 +25,7 @@ def api_h_crop_prediction_b_w(l1, l2, ph, rf, land):
 
 def api_h_crop_prediction_b_wo(l1, l2, rf, land):
     temp, hum = get_th_w_ll(l1, l2)
-    inp = [[temp, hum, rf]]
+    inp = [list(map(float, [temp, hum, rf]))]
     op = huf_basic_predict_wo_ph(inp)
     return """<html>
       <body>
