@@ -37,13 +37,17 @@ def api_h_crop_prediction_b_wo(l1, l2, rf, land):
 
 
 def api_h_crop_prediction_a(l1, l2, ph, rf, land, nitro, pho, pot):
+    temp, hum = get_th_w_ll(l1, l2)
+    inp = [list(map(float, [nitro, pho, pot, temp, hum, ph, rf]))]
+    op = str(huf_adv_predict_npk(inp))
+
     return """<html>
       <body>
       <h3> Optimal Crop to Grow is <b> {0} </b> </h3>
       <h3> Estimated Profit is : {1}   </h3>
       <h2> Government Minimum Support Price is Available @ {2}/quintal </h2>
       <br>
-      </body>""".format("Wheat", "62000", "7300")
+      </body>""".format(op, "62000", "7300")
 
 
 def huf_basic_predict_w_ph(inp):
@@ -58,6 +62,14 @@ def huf_basic_predict_wo_ph(inp):
     op = set()
     for i in range(1, 8):
         j = pickle.load(open('ml2/wo_ph/file' + str(i) + '.pkl', 'rb'))
+        op.add(j.predict(inp).tolist()[0])
+    return op
+
+
+def huf_adv_predict_npk(inp):
+    op = set()
+    for i in range(11, 22):
+        j = pickle.load(open('ml2/op_npk/file' + str(i) + '.pkl', 'rb'))
         op.add(j.predict(inp).tolist()[0])
     return op
 
