@@ -47,7 +47,7 @@ def api_h_crop_prediction_a(l1, l2, ph, rf, land, nitro, pho, pot):
 
 
 def huf_basic_predict_w_ph(inp):
-    op = {}
+    op = set()
     for i in range(1, 9):
         j = pickle.load(open('ml2/w_ph/file' + str(i) + '.pkl', 'rb'))
         op.add(j.predict(inp).tolist()[0])
@@ -55,7 +55,7 @@ def huf_basic_predict_w_ph(inp):
 
 
 def huf_basic_predict_wo_ph(inp):
-    op = {}
+    op = set()
     for i in range(1, 8):
         j = pickle.load(open('ml2/wo_ph/file' + str(i) + '.pkl', 'rb'))
         op.add(j.predict(inp).tolist()[0])
