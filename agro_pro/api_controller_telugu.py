@@ -8,12 +8,12 @@ import random
 
 
 @app.route('/api_how_to_use_telugu')
-def cont_fun_api_how_to_use():
+def cont_fun_api_how_to_use_telugu():
     return render_template('sub_1/how_to_use_telugu.html')
 
 
 @app.route('/api_crop_prediction_basic_w_ph_tel')
-def cont_api_crop_prediction_b_w():
+def cont_api_crop_prediction_b_w_telugu():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     ph = request.args.get('ph_soil')
@@ -35,7 +35,7 @@ def abc(rf):
 
 
 @app.route('/api_crop_prediction_basic_wo_ph_tel')
-def cont_api_crop_prediction_b_wo():
+def cont_api_crop_prediction_b_wo_telugu():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     rainfall = request.args.get('rainfall')
@@ -44,7 +44,7 @@ def cont_api_crop_prediction_b_wo():
 
 
 @app.route('/api_crop_prediction_advanced_telugu')
-def cont_api_crop_prediction_a():
+def cont_api_crop_prediction_a_telugu():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     ph = request.args.get('ph_soil')
@@ -57,7 +57,7 @@ def cont_api_crop_prediction_a():
 
 
 @app.route('/api_experimental_tel')
-def cont_fun_api_experimental():
+def cont_fun_api_experimental_telugu():
     code = request.args['code']
     code = int(code)
     if code == 1:
@@ -69,14 +69,14 @@ def cont_fun_api_experimental():
 
 
 @app.route('/api_weather_forecast_tel')
-def cont_fun_api_weather_forecast():
+def cont_fun_api_weather_forecast_telugu():
     a1 = request.args['lat']
     a2 = request.args['lon']
     return api_get_forecast_by_lat_long(a1, a2)
 
 
 @app.route('/api_climate_tel')
-def cont_fun_api_climate_details():
+def cont_fun_api_climate_details_telugu():
     a1 = request.args['lat']
     a2 = request.args['lon']
     return api_get_climate_by_lat_long(a1, a2)
