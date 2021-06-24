@@ -5,6 +5,7 @@ from statistics import mode
 from agro_pro import app
 import requests
 import json
+import pickle
 from agro_pro.api_tools2 import huf_basic_predict_w_ph as b1, huf_basic_predict_wo_ph as b2
 from agro_pro.test1 import get_climate_by_lat_long
 from agro_pro.test1 import get_forecast_by_lat_long
@@ -160,4 +161,19 @@ pc = grab()
 
 @app.route('/bestcrop')
 def best_crop():
-    return 'best crop'
+    lat = request.args.get('lat',1)
+    lon = request.args.get('lon',1)
+    ph = request.args.get('ph_soil',1)
+    rainfall = request.args.get('rainfall',1)
+    land = request.args.get('area_sq',1)
+    nitro = request.args.get('N',1)
+    pho = request.args.get('P',1)
+    pot = request.args.get('K',1)
+    inp = [list(map(float, [nitro, pho, pot, lat,lon, ph, rainfall]))]
+
+    op = list()
+    for i in range(11, 22):
+        j = pickle.load(open('ml2/op_npk/file' + str(i) + '.pkl', 'rb'))
+        op.append(j.predict(inp).tolist()[0])
+    op=str(op)
+    return op+"<br> <br>"+'/bestcrop?lat=&lon=&ph_soil&rainfall=&area_sq=&N=&P=&K='
