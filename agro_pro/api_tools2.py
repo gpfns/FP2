@@ -13,7 +13,7 @@ def fun_market_price_data():
 def api_h_crop_prediction_b_w(l1, l2, ph, rf, land):
     temp, hum = get_th_w_ll(l1, l2)
     inp = [list(map(float, [temp, hum, ph, rf]))]
-    op = huf_basic_predict_w_ph(inp)
+    op = str(huf_basic_predict_w_ph(inp))
     return """<html>
       <body>
       <h3> Optimal Crop to Grow is <b> {0} </b> </h3>
@@ -26,7 +26,7 @@ def api_h_crop_prediction_b_w(l1, l2, ph, rf, land):
 def api_h_crop_prediction_b_wo(l1, l2, rf, land):
     temp, hum = get_th_w_ll(l1, l2)
     inp = [list(map(float, [temp, hum, rf]))]
-    op = huf_basic_predict_wo_ph(inp)
+    op = str(huf_basic_predict_wo_ph(inp))
     return """<html>
       <body>
       <h3> Optimal Crop to Grow is <b> {0} </b> </h3>
@@ -47,18 +47,18 @@ def api_h_crop_prediction_a(l1, l2, ph, rf, land, nitro, pho, pot):
 
 
 def huf_basic_predict_w_ph(inp):
-    op = '\n'
+    op = {}
     for i in range(1, 9):
         j = pickle.load(open('ml2/w_ph/file' + str(i) + '.pkl', 'rb'))
-        op += str(j.predict(inp).tolist()) + '\n'
+        op.add(j.predict(inp).tolist()[0])
     return op
 
 
 def huf_basic_predict_wo_ph(inp):
-    op = '\n'
+    op = {}
     for i in range(1, 8):
         j = pickle.load(open('ml2/wo_ph/file' + str(i) + '.pkl', 'rb'))
-        op += str(j.predict(inp).tolist()) + '\n'
+        op.add(j.predict(inp).tolist()[0])
     return op
 
 
