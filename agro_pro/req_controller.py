@@ -7,7 +7,8 @@ import requests
 import json
 from agro_pro.test1 import get_climate_by_lat_long
 from agro_pro.test1 import get_forecast_by_lat_long
-from agro_pro.forms import GetForecastForm,GetClimateForm
+from agro_pro.forms import GetForecastForm, GetClimateForm
+
 
 @app.route('/')
 def home_page():
@@ -26,7 +27,7 @@ def get_climate_by_lat_long_org():
         longitude = form.lon.data
         sample += get_climate_by_lat_long(latitude, longitude)
     elif request.method == "GET":
-        if request.args.get('lat',''):
+        if request.args.get('lat', ''):
             latitude = request.args.get('lat')
             longitude = request.args.get('lon')
             sample += get_climate_by_lat_long(latitude, longitude)
@@ -46,7 +47,7 @@ def get_forecast_data():
         longitude = form.lon.data
         sample += get_forecast_by_lat_long(latitude, longitude)
     elif request.method == "GET":
-        if request.args.get('lat',''):
+        if request.args.get('lat', ''):
             latitude = request.args.get('lat')
             longitude = request.args.get('lon')
             sample += get_forecast_by_lat_long(latitude, longitude)
@@ -146,6 +147,7 @@ def predict_best1():
 
 pc = grab()
 # pc = ['m1']
+
 
 # app.run(debug=True,host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
 

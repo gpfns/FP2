@@ -1,14 +1,9 @@
 from agro_pro import app
 from flask import jsonify, render_template, request, redirect, url_for
-from agro_pro.api_tools import api_test_tool, api_get_climate_by_lat_long, api_get_forecast_by_lat_long
-from agro_pro.api_tools2 import api_h_crop_prediction_a as adv1, api_h_crop_prediction_b as basic
-
-
-@app.route('/api_test')
-def cont_fun_api_test():
-    a1 = request.args['lat']
-    a2 = request.args['lon']
-    return api_test_tool(a1, a2)
+from agro_pro.api_tools import api_get_climate_by_lat_long, api_get_forecast_by_lat_long
+from agro_pro.api_tools2 import (api_h_crop_prediction_a as adv1,
+                                 api_h_crop_prediction_b_w as basic_w,
+                                api_h_crop_prediction_b_wo as basic_wo)
 
 
 @app.route('/api_how_to_use')
@@ -16,14 +11,23 @@ def cont_fun_api_how_to_use():
     return render_template('sub_1/how_to_use.html')
 
 
-@app.route('/api_crop_prediction_basic')
-def cont_api_crop_prediction_b():
+@app.route('/api_crop_prediction_basic_w_ph')
+def cont_api_crop_prediction_b_w():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     ph = request.args.get('ph_soil')
     rainfall = request.args.get('rainfall')
     land = request.args.get('area_sq')
-    return basic(lat, lon, ph, rainfall, land)
+    return basic_w(lat, lon, ph, rainfall, land)
+
+
+@app.route('/api_crop_prediction_basic_wo_ph')
+def cont_api_crop_prediction_b_wo():
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
+    rainfall = request.args.get('rainfall')
+    land = request.args.get('area_sq')
+    return basic_wo(lat, lon, rainfall, land)
 
 
 @app.route('/api_crop_prediction_advanced')
