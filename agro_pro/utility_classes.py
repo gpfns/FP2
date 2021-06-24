@@ -3,8 +3,6 @@ class Current:
 
     def __init__(self, current_data):
         self.c = current_data
-        if self.c['air_quality']:
-            self.aq = self.c['air_quality']
 
     def get_air_quality(self):
         s1 = ""
