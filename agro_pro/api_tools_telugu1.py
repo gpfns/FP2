@@ -7,7 +7,8 @@ def api_get_forecast_by_lat_long(latitude, longitude, no_of_days=7):
         'q': str(latitude) + ',' + str(longitude),
         'aqi': 'no',
         'alerts': 'no',
-        'days': no_of_days
+        'days': no_of_days,
+        'lang': 'te',
     }
     url1 = 'http://api.weatherapi.com/v1/forecast.json'
     response = requests.get(url1, params=parameters)
@@ -20,7 +21,8 @@ def api_get_climate_by_lat_long(latitude, longitude):
     parameters = {
         'key': '6a95b306f1334a3a87c190139212005',
         'q': str(latitude) + ',' + str(longitude),
-        'aqi': 'no'
+        'aqi': 'no',
+        'lang': 'te',
     }
     url1 = 'http://api.weatherapi.com/v1/current.json'
     response = requests.get(url1, params=parameters)
