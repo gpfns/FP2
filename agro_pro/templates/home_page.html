@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<h2> Enter Temperature, Humidity, Rainfall values to find out the optimal crop to be grown.</h2>
 <form action="https://original-agro-pro.herokuapp.com/predict1" method="get">
 
 	<table class="table">
@@ -17,7 +18,7 @@
 	  </thead>
 	  <tbody>
 	    <tr>
-	      <th scope="row">Temparature</th>
+	      <th scope="row">Temperature</th>
 	      <td><input type ="text" name ="temp"></td>
 	    </tr>
 	    <tr>
